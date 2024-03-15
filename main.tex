@@ -1,0 +1,95 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath,amssymb}
+\usepackage{amsfonts}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+
+\title{The Fundamental Theorem of Statistical Learning}
+\author{Maria Khan, Amanuel Tesfaye, Claire Callon, Lynca Kaminka}
+\date{March 2024}
+
+\begin{document}
+
+\maketitle
+
+\section*{Outline}
+\section{Theorem Statement}
+    
+
+
+Let $\mathcal{H}$ be a be a hypothesis class of functions from a domain \textit{X} from to {0,1} and let the loss function be the 0-1 loss. Then, the following are equivalent:
+
+\begin{enumerate}
+\item $\mathcal{H}$ has the uniform convergence property
+\item Any ERM rule is a successful agnostic PAC learner for $\mathcal{H}$
+\item $\mathcal{H}$ is APAC
+\item $\mathcal{H}$ is PAC Learnable
+\item Any ERM rule is a successful PAC learner for $\mathcal{H}$
+\item $\mathcal{H}$ has finite VC dimension
+\end{enumerate}
+
+\section{Proving Statements}
+We will be proving how these statements are equivalent by proving that the following statements: \\
+\begin{enumerate}\\
+Statement 1 $\Rightarrow$ Statement 2 \\
+Statement 2 $\Rightarrow$ Statement 3 \\
+Statement 3 $\Rightarrow$ Statement 4 \\
+Statement 5 $\Rightarrow$ Statement 4 \\
+Statement 5 $\Rightarrow$ Statement 6 \\
+Statement 1 $\Rightarrow$ Statement 6 \\
+\end{enumerate}
+
+
+
+\section{Questions}
+
+What questions do we intend to answer that are alluded to in the book
+
+\begin{enumerate}
+\item How can we prevent failures described in NFL? (ch. 5) \begin{itemize}
+    \item We can go into more depth on the Bayes Optimal Classifier since they mention it as something good to pick for a hypothesis class but don't really go into that much depth
+\end{itemize}
+\item How does Corollary 4.4 follow directly from the definition of uniform convergence?
+\begin{itemize}
+\item We did this as a homework, but it is still worth mentioning since the textbook just says it follows "directly"
+\end{itemize}
+\item Why is the size of the set \textit{C} 2m in Corollary 6.4?
+\item In the NFL, why does the sample size, m have to be less than X/2? (In other words, why can it not be just smaller than X) 
+\item How does proper vs representation-independent learning play a role in APAC? (ch. 3)
+\begin{itemize}
+\item This was mentioned in remark 3.2 but expand on its relevance
+\end{itemize}
+
+\item What assumptions are broken in the NFL theorem? 
+\item Does the NFL theorem apply to a broder range of classification functions (i.e. square loss) ?
+\end{enumerate}
+
+\section{Clarifications}
+
+Include anything here that helps people understand different theorems, etc. \\ 
+\begin{enumerate}
+\item The discussion on the NFL theorem on why statement 1 and 2 are not contradictory. 
+\item Give an explicit definition of loss functions and types of loss
+\item Discuss inductive bias and how it relates to everything in chapters 2-6 (ERMs in ch.2, ch. 5)
+
+
+\end{enumerate} 
+\section{Deep Dive}
+Statement 4 $\Rightarrow$ Statement 6 \\ \\
+Proof by contrapositive: Infinite VC dimension $\Rightarrow$ not PAC Learnable \\ \\
+Let us assume $\mathcal{H}$ is PAC. Then there exists an algorithm A such that for all $\epsilon, \delta \in (0,\infty)$ there exists an $m_{\mathcal{H}}(\epsilon, \delta)$ where if $m \geq m_{\mathcal{H}}(\epsilon, \delta)$, ${\mathbb{P}}\left[\mathcal{L}_D(A(s))>\varepsilon + \mathcal{L}(h')\right]<\delta \text{.}$ where $h'$ has the least possible loss.\\ \\ 
+Now let $\epsilon = \frac{1}{8}$ and $\delta < \frac{1}{7}$. Since the VC($\mathcal{H}$) is infinite, there exists $2m$ samples in $X$ that shatter $\mathcal{H}$ by the textbook.
+By the NFL theorem, There exists \( f : X \rightarrow \{0,1\} \)  with  ${{L}_D(f)= 0 }$ and ${\mathbb{P}} [\mathcal{L}_D(A(s)) > 1/8) > 1/7\\$
+\\ Therefore ${{L}_D(h')= 0 }$ \\ \\ 
+So, ${\mathbb{P}}\left[\mathcal({L}_D(A(s))>\varepsilon + \mathcal{L}(h')\right] \geq {\mathbb{P}}\left[\mathcal{L}_D(A(s))>\frac{1}{8}\right] > \frac{1}{7} > \delta$. This is a contradiction since the above expression should be less than $\delta$. \\
+QED
+
+Please comment on which clarifications/questions would be particularly helpful to look into.
+
+
+
+
+
+\end{document}
